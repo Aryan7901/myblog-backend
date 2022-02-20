@@ -7,6 +7,6 @@ const blogSchema = new Schema({
     ref: "User",
   },
   description: { type: String, required: true },
-  article: { type: String, required: true, min: 50 },
+  article: { type: String, required: true, min: 500 },
 });
 module.exports = model("Blog", blogSchema);

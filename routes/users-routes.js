@@ -10,7 +10,7 @@ router.post(
     check("firstName").not().isEmpty(),
     check("lastName").not().isEmpty(),
     check("email").normalizeEmail().isEmail(),
-    check("password").isLength({ min: 6 }),
+    check("password").isLength({ min: 8 }),
   ],
   userController.signup
 );
@@ -24,7 +24,7 @@ router.post(
   [
     check("title").notEmpty(),
     check("description").notEmpty(),
-    check("article").isLength({ min: 50 }),
+    check("article").isLength({ min: 500 }),
   ],
   blogCrudController.createBlogPage
 );
@@ -34,7 +34,7 @@ router.patch(
   [
     check("title").notEmpty(),
     check("description").notEmpty(),
-    check("article").isLength({ min: 50 }),
+    check("article").isLength({ min: 500 }),
   ],
   blogCrudController.updateBlogPage
 );
