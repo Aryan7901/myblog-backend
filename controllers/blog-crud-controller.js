@@ -25,7 +25,7 @@ const createBlogPage = async (req, res, next) => {
     const user = await User.findById(userId);
     user.blogs.push(createdBlog);
     await user.save({ session });
-    session.commitTransaction();
+    await session.commitTransaction();
   } catch (err) {
     const error = new HttpError(
       "Creating new blog failed, please try again later.",
@@ -33,7 +33,7 @@ const createBlogPage = async (req, res, next) => {
     );
     return next(error);
   }
-  res.send({ createdBlog });
+  res.json({ createdBlog });
 };
 const updateBlogPage = async (req, res, next) => {
   const errors = validationResult(req);
@@ -53,7 +53,7 @@ const updateBlogPage = async (req, res, next) => {
     blog.description = description;
     blog.article = article;
     await blog.save();
-    res.send({ blog });
+    res.json({ blog });
   } catch (err) {
     return next(
       new HttpError("Updating  blog failed, please try again later.", 500)
@@ -77,7 +77,7 @@ const deleteBlogPage = async (req, res, next) => {
     ).setOptions({ session });
     await session.commitTransaction();
 
-    res.send({ blog });
+    res.json({ blog });
   } catch (err) {
     console.log(err);
     return next(
@@ -89,7 +89,7 @@ const getUsersPages = async (req, res, next) => {
   const id = req.userData.userId;
   try {
     const user = await User.findById(id).populate("blogs");
-    res.send({
+    res.json({
       blogs: user.blogs,
       author: { firstName: user.firstName, lastName: user.lastName },
     });

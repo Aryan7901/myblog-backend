@@ -1,6 +1,6 @@
 const express = require("express");
 const { check } = require("express-validator");
-const router = require("./blog-routes");
+const router = express.Router();
 const checkAuth = require("../middleware/check-auth");
 const userController = require("../controllers/user-controller");
 const blogCrudController = require("../controllers/blog-crud-controller");
